@@ -1,17 +1,34 @@
+@font-face {
+    font-family: "Cenotaph";
+    src: url("Cenotaph-Titling.otf"), format("opentype");
+}
+
 body {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 3fr 10fr;
+    margin: 0;
+}
+
+.sidebar {
+    grid-column: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: blanchedalmond;
+}
+
+.sidebar h1 {
+    padding-bottom: 1em;
+    font-family: "Cenotaph";
+    font-size: 1.75em;
 }
 
 .menu {
-    grid-column: 1;
     display: flex;
     flex-direction: column;
+    flex: 0.75;
+    justify-content: space-between;
     align-items: center;
-}
-
-.menu ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-size: larger;
 }
