@@ -1,33 +1,37 @@
 [
   {
+    "src": "assets/photos/manifest.json",
+    "thumb": "assets/photos/manifest.json",
+    "alt": "Manifest"
+  },
+  {
     "src": "assets/photos/photo1.svg",
     "thumb": "assets/photos/thumbs/photo1.svg",
-    "alt": "Photo 1"
+    "alt": "Photo1"
   },
   {
     "src": "assets/photos/photo2.svg",
     "thumb": "assets/photos/thumbs/photo2.svg",
-    "alt": "Photo 2"
+    "alt": "Photo2"
   },
   {
     "src": "assets/photos/photo3.svg",
     "thumb": "assets/photos/thumbs/photo3.svg",
-    "alt": "Photo 3"
+    "alt": "Photo3"
   },
   {
     "src": "assets/photos/photo4.svg",
     "thumb": "assets/photos/thumbs/photo4.svg",
-    "alt": "Photo 4"
+    "alt": "Photo4"
   },
   {
     "src": "assets/photos/photo5.svg",
     "thumb": "assets/photos/thumbs/photo5.svg",
-    "alt": "Photo 5"
+    "alt": "Photo5"
   },
   {
     "src": "assets/photos/photo6.svg",
     "thumb": "assets/photos/thumbs/photo6.svg",
-    "alt": "Photo 6"
+    "alt": "Photo6"
   }
 ]
-
