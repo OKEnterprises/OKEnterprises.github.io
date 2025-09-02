@@ -5,6 +5,7 @@ Add static photo gallery, manifest loader, and auto thumbnail generation
 - Adds a responsive photo grid with a lightbox.
 - Auto-builds thumbnails and a manifest from `assets/photos/`.
 - Documents contributor workflow in AGENTS.md, including feature-branch workflow and frequent commits.
+- Adds CI workflow to auto-generate thumbnails and manifest on push.
 
 **Changes**
 - `photos.html`: Gallery markup, lightbox, loads `assets/photos/manifest.json` with a JS fallback.
@@ -13,6 +14,7 @@ Add static photo gallery, manifest loader, and auto thumbnail generation
 - `scripts/generate-photos-manifest.js`: Scans photos/thumbs and writes `assets/photos/manifest.json`.
 - `assets/photos/*` and `assets/photos/thumbs/*`: Placeholder images.
 - `AGENTS.md`: Repository guidelines and photos workflow; added requirement to create feature branches and commit regularly.
+- `.github/workflows/generate-photos.yml`: GitHub Actions workflow that installs ImageMagick, runs the thumbnail script, updates the manifest, and auto-commits with `[skip ci]`.
 
 **How To Test**
 - Local server: `python3 -m http.server 4000` then open `http://localhost:4000/photos.html`.
@@ -40,6 +42,7 @@ Add static photo gallery, manifest loader, and auto thumbnail generation
 - No impact to `index.html` nav (photos link already exists).
 - `CNAME` unchanged.
 - If neither `sips` nor ImageMagick is installed, thumbnails won’t be generated (script errors with guidance).
+- CI commits include `[skip ci]` to avoid triggering the workflow again.
 
 **Checklist**
 - [ ] Screenshots attached (desktop + mobile)
@@ -48,4 +51,3 @@ Add static photo gallery, manifest loader, and auto thumbnail generation
 - [ ] Cross-browser spot check (Safari/Chrome/Firefox)
 - [ ] Accessibility quick pass (keyboard nav, alt text)
 - [ ] Docs reflect branching/commit workflow
-
