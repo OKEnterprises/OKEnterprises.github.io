@@ -19,7 +19,7 @@ body { margin: 0; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: blanchedalmond;
 }
 
@@ -35,8 +35,10 @@ body { margin: 0; }
     flex-direction: column;
     align-items: center;
     font-size: 1.25em;
-    gap: 24px;
+    gap: 0;
     padding: 12px 0 24px;
+    flex: 1; /* fill remaining space under the title */
+    justify-content: space-evenly; /* spread links across available space */
 }
 
 .menu a {
