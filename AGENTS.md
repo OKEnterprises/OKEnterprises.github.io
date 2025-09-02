@@ -39,8 +39,15 @@
   - This writes `assets/photos/thumbs/` and updates `assets/photos/manifest.json`.
 - Add full images to `assets/photos/`; thumbs are produced automatically with center-cropped 400x400 squares.
 
+## Videos: Thumbnails & Manifest
+- Place video files in `assets/videos/` (`.mp4`, `.webm`, `.mov`, `.m4v`, `.ogv`).
+- Generate thumbnails (first-frame) and manifest:
+  - `bash scripts/generate-video-thumbs.sh` (requires `ffmpeg`; uses ImageMagick if available for square crop).
+  - This writes `assets/videos/thumbs/` and updates `assets/videos/manifest.json`.
+- The videos page (`videos.html`) loads the manifest and shows a clickable grid; lightbox plays the selected video.
+
 ## CI Automation
-- On push, GitHub Actions runs `.github/workflows/generate-photos.yml` to:
-  - Generate/refresh thumbnails and `assets/photos/manifest.json`.
+- On push, GitHub Actions runs `.github/workflows/generate-assets.yml` to:
+  - Generate/refresh photo and video thumbnails and manifests.
   - Auto-commit results with `[skip ci]` to avoid loops.
 - You can still run the scripts locally for faster iteration.

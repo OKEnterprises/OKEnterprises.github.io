@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Videos — Garret O'Connor</title>
+    <meta name="description" content="Video gallery">
+    <style>
+        .gallery{display:grid;gap:12px}
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Garret O'Connor</h1>
+        <nav class="menu">
+            <a href="./index.html">HOME</a>
+            <a href="./videos.html">VIDEO</a>
+            <a href="./photos.html">PHOTO</a>
+            <a>WEB</a>
+        </nav>
+    </div>
+
+    <div class="gallery" id="gallery" aria-live="polite"></div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Video viewer" tabindex="-1">
+        <video id="lightbox-video" controls playsinline></video>
+    </div>
+
+    <script>
+    (function(){
+        const gallery = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxVideo = document.getElementById('lightbox-video');
+
+        function render(items){
+            items.forEach(item => {
+                const a = document.createElement('a');
+                a.href = item.src;
+                a.className = 'thumb';
+                a.setAttribute('aria-label', 'Play video');
+
+                const img = document.createElement('img');
+                img.loading = 'lazy';
+                img.src = item.thumb || placeholderThumb(item.src);
+                img.alt = item.alt || deriveAlt(item.src);
+                a.appendChild(img);
+
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openLightbox(item.src, item.type);
+                });
+
+                gallery.appendChild(a);
+            });
+        }
+
+        function placeholderThumb(src){
+            return 'assets/photos/thumbs/photo1.svg';
+        }
+
+        function deriveAlt(src){
+            const base = src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+            return base ? base.charAt(0).toUpperCase() + base.slice(1) : '';
+        }
+
+        function openLightbox(src, type){
+            lightboxVideo.src = src;
+            if (type) lightboxVideo.type = type;
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            lightboxVideo.play().catch(()=>{});
+            lightbox.focus();
+        }
+
+        function closeLightbox(){
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxVideo.pause();
+            lightboxVideo.removeAttribute('src');
+            lightboxVideo.load();
+        }
+
+        lightbox.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+        });
+        lightboxVideo.addEventListener('click', (e) => e.stopPropagation());
+
+        async function init(){
+            const manifestUrl = 'assets/videos/manifest.json';
+            let items = [];
+            try {
+                const res = await fetch(manifestUrl, { cache: 'no-store' });
+                if (!res.ok) throw new Error('Failed to load manifest');
+                items = await res.json();
+            } catch (e) {
+                items = [];
+            }
+            render(items);
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>
+
