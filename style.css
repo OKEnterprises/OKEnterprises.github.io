@@ -3,6 +3,9 @@
     src: url("Cenotaph-Titling.otf"), format("opentype");
 }
 
+/* Global reset for consistent layout */
+body { margin: 0; }
+
 /* Layout only when a sidebar is present */
 .has-sidebar {
     display: grid;
@@ -16,6 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: blanchedalmond;
 }
 
@@ -31,7 +35,7 @@
     flex-direction: column;
     align-items: center;
     font-size: 1.25em;
-    gap: 16px;
+    gap: 24px;
     padding: 12px 0 24px;
 }
 
