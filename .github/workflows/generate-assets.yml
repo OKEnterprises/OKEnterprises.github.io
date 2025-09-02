@@ -1,4 +1,4 @@
-name: Generate photos thumbnails and manifest
+name: Generate thumbnails and manifests
 
 on:
   push:
@@ -18,19 +18,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install ImageMagick
+      - name: Install ImageMagick and FFmpeg
         run: |
           sudo apt-get update
-          sudo apt-get install -y imagemagick
+          sudo apt-get install -y imagemagick ffmpeg
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Generate thumbnails and manifest
+      - name: Generate photo thumbnails and manifest
         run: |
           bash scripts/generate-thumbs.sh
+      - name: Generate video thumbnails and manifest
+        run: |
+          bash scripts/generate-video-thumbs.sh || echo "No videos to process"
 
       - name: Commit and push changes
         run: |
@@ -38,9 +41,9 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add assets/photos/thumbs assets/photos/manifest.json || true
+            git add assets/videos/thumbs assets/videos/manifest.json || true
             git commit -m "ci: generate thumbnails and update manifest [skip ci]"
             git push
           else
             echo "No changes to commit"
           fi
-
