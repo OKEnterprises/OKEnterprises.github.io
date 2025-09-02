@@ -1,10 +1,5 @@
 [
   {
-    "src": "assets/photos/manifest.json",
-    "thumb": "assets/photos/manifest.json",
-    "alt": "Manifest"
-  },
-  {
     "src": "assets/photos/photo1.svg",
     "thumb": "assets/photos/thumbs/photo1.svg",
     "alt": "Photo1"

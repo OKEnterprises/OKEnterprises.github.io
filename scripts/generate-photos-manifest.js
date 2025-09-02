@@ -10,6 +10,7 @@ const root = path.join(__dirname, '..');
 const photosDir = path.join(root, 'assets', 'photos');
 const thumbsDir = path.join(photosDir, 'thumbs');
 const manifestPath = path.join(photosDir, 'manifest.json');
+const allowedExt = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.avif']);
 
 function isFile(p) {
   try { return fs.statSync(p).isFile(); } catch { return false; }
@@ -27,10 +28,15 @@ function main(){
   }
 
   const all = fs.readdirSync(photosDir)
-    .filter(name => name !== 'thumbs')
-    .filter(name => isFile(path.join(photosDir, name)));
+    .filter(name => name !== 'thumbs' && name !== 'manifest.json' && !name.startsWith('.'))
+    .filter(name => {
+      const p = path.join(photosDir, name);
+      return isFile(p) && allowedExt.has(path.extname(name).toLowerCase());
+    });
 
-  const thumbs = fs.existsSync(thumbsDir) ? fs.readdirSync(thumbsDir).filter(name => isFile(path.join(thumbsDir, name))) : [];
+  const thumbs = fs.existsSync(thumbsDir)
+    ? fs.readdirSync(thumbsDir).filter(name => isFile(path.join(thumbsDir, name)) && allowedExt.has(path.extname(name).toLowerCase()))
+    : [];
 
   function findThumb(base) {
     // Prefer exact same basename (any extension)
@@ -53,4 +59,3 @@ function main(){
 }
 
 main();
-
