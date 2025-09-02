@@ -97,6 +97,14 @@
             } catch (e) {
                 items = [];
             }
+            if (!Array.isArray(items) || items.length === 0) {
+                // Fallback placeholders using CC0 sample videos
+                items = [
+                    { src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumb: 'assets/photos/thumbs/photo1.svg', alt: 'Flower sample', type: 'video/mp4' },
+                    { src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumb: 'assets/photos/thumbs/photo2.svg', alt: 'Sample video 2', type: 'video/mp4' },
+                    { src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', thumb: 'assets/photos/thumbs/photo3.svg', alt: 'Sample video 3', type: 'video/mp4' },
+                ];
+            }
             render(items);
         }
 
@@ -105,4 +113,3 @@
     </script>
 </body>
 </html>
-
