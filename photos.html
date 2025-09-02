@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Photos — Garret O'Connor</title>
+    <meta name="description" content="Photo gallery">
+    <style>
+        /* Minimal fallback if style.css is cached */
+        .gallery{display:grid;gap:12px}
+    </style>
+    
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Garret O'Connor</h1>
+        <nav class="menu">
+            <a href="./index.html">HOME</a>
+            <a>VIDEO</a>
+            <a href="./photos.html">PHOTO</a>
+            <a>WEB</a>
+        </nav>
+    </div>
+
+    <div class="gallery" id="gallery" aria-live="polite"></div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Full-size image viewer" tabindex="-1">
+        <img id="lightbox-img" alt="">
+    </div>
+
+    <script>
+    (function(){
+        const gallery = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function render(images){
+            images.forEach(item => {
+                const a = document.createElement('a');
+                a.href = item.src;
+                a.className = 'thumb';
+                a.setAttribute('aria-label', 'View full-size');
+                const img = document.createElement('img');
+                img.loading = 'lazy';
+                img.src = item.thumb || item.src;
+                img.alt = item.alt || deriveAlt(item.src);
+                a.appendChild(img);
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openLightbox(item.src, img.alt);
+                });
+                gallery.appendChild(a);
+            });
+        }
+
+        function deriveAlt(src){
+            const base = src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+            return base ? base.charAt(0).toUpperCase() + base.slice(1) : '';
+        }
+
+        function openLightbox(src, alt){
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || '';
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            lightbox.focus();
+        }
+
+        function closeLightbox(){
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxImg.src = '';
+        }
+
+        lightbox.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+        });
+
+        // Prevent closing when clicking the image itself
+        lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+
+        async function init(){
+            const manifestUrl = 'assets/photos/manifest.json';
+            let images = [];
+            try {
+                const res = await fetch(manifestUrl, { cache: 'no-store' });
+                if (!res.ok) throw new Error('Failed to load manifest');
+                images = await res.json();
+            } catch (e) {
+                images = [
+                    { src: 'assets/photos/photo1.svg', thumb: 'assets/photos/thumbs/photo1.svg' },
+                    { src: 'assets/photos/photo2.svg', thumb: 'assets/photos/thumbs/photo2.svg' },
+                    { src: 'assets/photos/photo3.svg', thumb: 'assets/photos/thumbs/photo3.svg' },
+                    { src: 'assets/photos/photo4.svg', thumb: 'assets/photos/thumbs/photo4.svg' },
+                    { src: 'assets/photos/photo5.svg', thumb: 'assets/photos/thumbs/photo5.svg' },
+                    { src: 'assets/photos/photo6.svg', thumb: 'assets/photos/thumbs/photo6.svg' },
+                ];
+            }
+            render(images);
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>
