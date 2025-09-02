@@ -3,6 +3,12 @@
     src: url("Cenotaph-Titling.otf"), format("opentype");
 }
 
+@font-face {
+    font-family: "OptimaCustom";
+    src: local('Optima'), url('OPTIMA.TTF') format('truetype');
+    font-display: swap;
+}
+
 /* Global reset for consistent layout */
 body { margin: 0; }
 
@@ -23,11 +29,12 @@ body { margin: 0; }
     background-color: blanchedalmond;
 }
 
-.sidebar > h1 {
-    font-family: "Cenotaph";
+.sidebar > h1 { margin: 24px 0 8px; }
+
+.site-title {
+    font-family: "OptimaCustom", "Cenotaph", serif;
     font-size: 2.5em;
     text-align: center;
-    margin: 24px 0 8px;
 }
 
 .menu {
@@ -107,6 +114,11 @@ body { margin: 0; }
     align-items: center;
     justify-content: center;
     gap: 24px;
+}
+
+.home .site-title {
+    font-size: 2.75em;
+    margin: 0;
 }
 
 .top-menu {
