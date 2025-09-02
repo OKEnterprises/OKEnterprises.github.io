@@ -23,6 +23,8 @@
 - Ensure all new links are reachable and relative paths resolve locally and on GitHub Pages.
 
 ## Commit & Pull Request Guidelines
+- Workflow: Always create a feature branch (e.g., `feature/<short-name>`) for changes; avoid committing directly to `main`.
+- Commit cadence: Commit early and often with small, focused changes; write clear messages so history is easy to review.
 - Commits: Short, imperative summaries in present tense (e.g., "Add photos page", "Refine sidebar spacing"). Scope in body if needed.
 - PRs: Include a brief description of changes, before/after screenshots for visual tweaks, and link any related issues.
 - Keep changes focused; update navigation links when adding or renaming pages.
