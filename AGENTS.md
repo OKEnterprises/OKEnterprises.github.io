@@ -38,3 +38,9 @@
   - `bash scripts/generate-thumbs.sh` (uses `sips` on macOS or ImageMagick)
   - This writes `assets/photos/thumbs/` and updates `assets/photos/manifest.json`.
 - Add full images to `assets/photos/`; thumbs are produced automatically with center-cropped 400x400 squares.
+
+## CI Automation
+- On push, GitHub Actions runs `.github/workflows/generate-photos.yml` to:
+  - Generate/refresh thumbnails and `assets/photos/manifest.json`.
+  - Auto-commit results with `[skip ci]` to avoid loops.
+- You can still run the scripts locally for faster iteration.
