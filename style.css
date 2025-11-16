@@ -56,7 +56,7 @@ body { margin: 0; }
 }
 
 .menu a:hover {
-    background: rgba(0,0,0,0.06);
+    text-decoration: underline;
 }
 
 /* Gallery layout */
@@ -137,5 +137,5 @@ body { margin: 0; }
 }
 
 .top-menu a:hover {
-    background: rgba(0,0,0,0.06);
+    text-decoration: underline;
 }
