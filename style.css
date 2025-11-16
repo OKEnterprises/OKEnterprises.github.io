@@ -29,6 +29,11 @@ body { margin: 0; }
     margin: 0;
 }
 
+.site-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .top-menu {
     display: flex;
     gap: 24px;
