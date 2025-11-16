@@ -12,56 +12,44 @@
 /* Global reset for consistent layout */
 body { margin: 0; }
 
-/* Layout only when a sidebar is present */
-.has-sidebar {
-    display: grid;
-    grid-template-columns: 20% 80%;
-    margin: 0;
-}
-
-.sidebar {
-    grid-column: 1;
-    height: 100vh;
+/* Top navigation header */
+.top-nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    background-color: blanchedalmond;
+    padding: 24px 24px 16px;
+    gap: 16px;
 }
-
-.sidebar > h1 { margin: 24px 0 8px; }
 
 .site-title {
     font-family: "Cinzel", "Cenotaph", serif;
     font-size: 2.5em;
     text-align: center;
+    font-weight: normal;
+    margin: 0;
 }
 
-.menu {
+.top-menu {
     display: flex;
-    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
     align-items: center;
-    font-size: 1.25em;
-    gap: 0;
-    padding: 12px 0 24px;
-    flex: 1; /* fill remaining space under the title */
-    justify-content: space-evenly; /* spread links across available space */
+    font-size: 1.1em;
 }
 
-.menu a {
+.top-menu a {
     text-decoration: none;
     color: #000;
     padding: 6px 10px;
     border-radius: 6px;
 }
 
-.menu a:hover {
+.top-menu a:hover {
     text-decoration: underline;
 }
 
 /* Gallery layout */
 .gallery {
-    grid-column: 2;
     padding: 24px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -106,7 +94,7 @@ body { margin: 0; }
     border-radius: 6px;
 }
 
-/* Home page (no sidebar) */
+/* Home page */
 .home {
     min-height: 100vh;
     display: flex;
@@ -118,24 +106,4 @@ body { margin: 0; }
 
 .home .site-title {
     font-size: 2.75em;
-    margin: 0;
-}
-
-.top-menu {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.1em;
-}
-
-.top-menu a {
-    text-decoration: none;
-    color: #000;
-    padding: 6px 10px;
-    border-radius: 6px;
-}
-
-.top-menu a:hover {
-    text-decoration: underline;
 }
