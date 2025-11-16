@@ -35,6 +35,7 @@ body { margin: 0; }
     font-family: "Cinzel", "Cenotaph", serif;
     font-size: 2.5em;
     text-align: center;
+    font-weight: normal;
 }
 
 .menu {
