@@ -61,22 +61,8 @@ body {
 
 .top-menu a:hover {
     color: #4a4a4a;
-}
-
-.top-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: #1a1a1a;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.top-menu a:hover::after {
-    width: 100%;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 /* Gallery layout */
